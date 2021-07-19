@@ -9,14 +9,21 @@ const url = args[0];
 const minPrice = args[1];
 
 checkPrice();
+// sendEmail('check', 'checkbody');
 
 async function checkPrice() {
   try {
+    console.log("trying", url);
     const priceString = await nightmare
       .goto(url)
-      .wait("#priceblock_dealprice")
-      .evaluate(() => document.getElementById("priceblock_dealprice").innerText)
-      .end();
+      .wait("#priceblock_ourprice")
+      .evaluate(() => document.getElementById("priceblock_ourprice").innerText)
+      .end()
+      // .then(console.log('yoyo')
+      // .catch((error) => {
+      //   console.error("Search failed:", error);
+      // });
+    console.log(priceString);
     const priceNumber = parseFloat(priceString.slice(7));
     if (priceNumber < minPrice) {
       console.log("price is low");
@@ -33,7 +40,7 @@ async function checkPrice() {
 
 function sendEmail(subject, body) {
   const email = {
-    to: "yadapi1959@28woman.com",
+    to: "imsidduroy@gmail.com",
     from: "yadapi1959@28woman.com",
     subject: subject,
     text: body,
@@ -46,7 +53,5 @@ function sendEmail(subject, body) {
     })
     .catch((error) => {
       console.log(error.response.body);
-      // console.log(error.response.body.errors[0].message)
     });
-//   return sgMail.send(email);
 }
