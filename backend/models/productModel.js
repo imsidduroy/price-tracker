@@ -8,6 +8,7 @@ const productSchema = new mongoose.Schema(
     subscribers: {
       type: Map,
       of: Number,
+      default: () => ({})
     },
   },
   {

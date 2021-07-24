@@ -1,8 +1,3 @@
-// require("dotenv").config();
-// const sgMail = require("@sendgrid/mail");
-// const Product = require("./models/productModel.js")
-// const nightmare = require("nightmare")();
-
 import dotenv from "dotenv"
 import sgMail from '@sendgrid/mail'
 import Product from "./models/productModel.js"
