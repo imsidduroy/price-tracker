@@ -1,2 +1,3 @@
 # price-tracker
-Run this in your teminal ---> node checker.js     YOUR-PRODUCT-LINK      PRICE-YOU-WANT-NOTIFIED
+Live at : https://price-tracker-website.herokuapp.com/
+
