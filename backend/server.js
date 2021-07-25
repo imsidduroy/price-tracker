@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
 import productRouter from "./routers/productRouter.js";
 
 dotenv.config();
@@ -18,6 +19,12 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/amazona", {
 .catch(err => console.error(err));
 
 app.use("/api/", productRouter);
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
