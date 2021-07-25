@@ -3,11 +3,6 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import productRouter from "./routers/productRouter.js";
 
-// const express = require('express')
-// const mongoose = require('mongoose')
-// const dotenv = require('dotenv')
-// const productRouter = require('./routers/productRouter.js')
-
 dotenv.config();
 
 const app = express();
