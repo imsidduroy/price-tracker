@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/amazona", {
 .then(() => console.log("mongodb connected ..."))
 .catch(err => console.error(err));
 
-app.use("/api/products", productRouter);
+app.use("/api/", productRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
