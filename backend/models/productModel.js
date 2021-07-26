@@ -5,11 +5,7 @@ const productSchema = new mongoose.Schema(
   {
     name: { type: String },
     url: { type: String, required: true, unique: true },
-    subscribers: {
-      type: Map,
-      of: Number,
-      default: () => ({})
-    },
+    subscribers: [{emailId: String, price_needed: Number}]
   },
   {
     timestamps: true,

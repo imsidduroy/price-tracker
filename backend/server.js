@@ -3,14 +3,16 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import path from "path";
 import productRouter from "./routers/productRouter.js";
+import {checkerInit, rollEmails} from "./checker.js"
 
 dotenv.config();
+checkerInit();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/amazona", {
+await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/amazona", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
@@ -25,6 +27,9 @@ app.use(express.static(path.join(__dirname, "/frontend/build")));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
 );
+
+rollEmails();
+// setInterval(rollEmails, 60 * 60);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
