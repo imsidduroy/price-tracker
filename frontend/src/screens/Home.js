@@ -5,7 +5,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Alert from '@material-ui/lab/Alert';
+import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -49,15 +50,19 @@ export default function Home() {
   const [email, setEmail] = React.useState("");
   const [url, setUrl] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [submit, setSubmit] = React.useState("NOT_DONE");
+  //0-not submitted --- 1-pending --- 2-submitted
 
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      setSubmit("PENDING");
       const data = await axios.post("/api/", {
         email,
         url,
         price,
       });
+      setSubmit("DONE");
       console.log("responce came", data);
     } catch (err) {
       console.log(err);
@@ -68,8 +73,10 @@ export default function Home() {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+        {submit === 'PENDING' && <Alert severity="warning">Please wait - Subscribing to the product !!</Alert>}
+        {submit === 'DONE' && <Alert onClose={() => {setSubmit('NOT_DONE')}}>Sucessfully subscribed !!</Alert>}
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <TrendingDownIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Price Tracker
