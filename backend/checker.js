@@ -93,7 +93,8 @@ function sendEmails(emails){
             subject: `!!! Price alert for ${name}`,
             text: `Rs. ${price} is the price of ${name}\n
                    Click here to visit product page ${url}`,
-            html: `<h1>Rs. ${price} is the price of ${name}\n
+            html: ` <h1>!! Price alert </h1>\n
+                    <h2>Rs. ${price} is the price of ${name}</h1>\n
                     <h4>Click here to visit product page ${url}</h4>`
         };
         sgMail
