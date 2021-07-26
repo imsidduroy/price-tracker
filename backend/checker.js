@@ -86,38 +86,23 @@ function sendEmails(emails){
       const {emailId, price, name, url} = email;
         const mail = {
             to: emailId,
-            from: 'siddusiddartha3@gmail.com',
-            subject: `Price alert for ${name}`,
-            text: `The price of ${name} is ${price}\n
+            from: {
+              email: 'siddusiddartha3@gmail.com', // Change to your verified sender
+              name: 'Price-Tracker'
+            },
+            subject: `!!! Price alert for ${name}`,
+            text: `Rs. ${price} is the price of ${name}\n
                    Click here to visit product page ${url}`,
-            html: `The price of ${name} is ${price}`
+            html: `<h1>Rs. ${price} is the price of ${name}\n
+                    <h4>Click here to visit product page ${url}</h4>`
         };
         sgMail
           .send(mail)
           .then(() => {
             console.log(`Message sent to ${emailId}`);
-
           })
           .catch((error) => {
             console.log(error.message);
           });
     }
-}
-
-function sendEmail(subject, body) {
-  const email = {
-    to: "imsidduroy@gmail.com",
-    from: "yadapi1959@28woman.com",
-    subject: subject,
-    text: body,
-    html: body,
-  };
-  sgMail
-    .send(email)
-    .then(() => {
-      console.log("Message sent");
-    })
-    .catch((error) => {
-      console.log(error.response.body);
-    });
 }
