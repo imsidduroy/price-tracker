@@ -28,8 +28,7 @@ app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
 );
 
-rollEmails();
-// setInterval(rollEmails, 60 * 60);
+setInterval(rollEmails, 1000 * 60 * 60);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
@@ -38,4 +37,5 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`Serve at http://localhost:${port}`);
+  rollEmails();
 });

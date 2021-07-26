@@ -16,13 +16,13 @@ export async function checkPrice(url) {
       // gotoTimeout: 5000,
       // executionTimeout: 5000
     });
-    console.log("trying", url)
+    console.log("trying_price")
     const priceString = await nightmare
       .goto(url)
       .wait("#priceblock_ourprice")
       .evaluate(() => document.getElementById("priceblock_ourprice").innerText)
       .end()
-    console.log("from funciton", priceString);
+    // console.log("got_price", priceString);
     const priceNumber = Number(priceString.replace(/[^0-9.-]+/g,""));
     return priceNumber;
   } catch (e) {
@@ -43,7 +43,7 @@ export async function getProductName(url) {
       .wait("#productTitle")
       .evaluate(() => document.getElementById("productTitle").innerText)
       .end()
-    console.log("from funciton", productName);
+    // console.log("from funciton", productName);
     return productName;
   } catch (e) {
     console.log(e.message);
@@ -60,9 +60,9 @@ export async function rollEmails(){
         const {url, name} = product;
         const sentTo = []
         const price = await checkPrice(url);
-        console.log(price);
+        console.log('got_price', price);
         for (let {_id, emailId, price_needed} of product.subscribers) {
-          console.log(emailId, price_needed);
+          // console.log(emailId, price_needed);
           if(price !== -1 && price <= price_needed){
             emails.push({emailId, price, name, url}); 
             sentTo.push(_id);
@@ -82,7 +82,7 @@ export async function rollEmails(){
 function sendEmails(emails){
     console.log('entered sendEmails', emails)
     for(let email of emails){
-      console.log(email)
+      // console.log(email)
       const {emailId, price, name, url} = email;
         const mail = {
             to: emailId,
