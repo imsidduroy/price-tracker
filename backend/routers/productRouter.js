@@ -49,7 +49,7 @@ productRouter.post(
             throw new Error(err.message)
           })
     }
-    rollEmails()
+    //rollEmails()
     console.log("success!!!")
     res.send({ message: "Subscribed successfully!!"});
   })
