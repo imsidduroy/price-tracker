@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 await mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/amazona", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true,
+  //useCreateIndex: true,
 })
 .then(() => console.log("mongodb connected ..."))
 .catch(err => console.error(err));
