@@ -11,4 +11,4 @@ Live at : https://price-tracker-website.herokuapp.com/
 
 ![](readme.gif)
 
-Note: Currently supports only [Amazon](www.amazon.in) website
+Note: Currently supports only www.amazon.in website
